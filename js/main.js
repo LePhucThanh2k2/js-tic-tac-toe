@@ -35,8 +35,7 @@ function reset() {
   currentTurn = TURN.CROSS;
   cellValues = new Array(9).fill("");
   gameStatus = GAME_STATUS.PLAYING;
-  const gameStatusElement = getGameStatusElement();
-  gameStatusElement.textContent = gameStatus;
+  updateGameStatus(GAME_STATUS.PLAYING);
   const currentTurnElement = getCurrentTurnElement();
   currentTurnElement.classList.remove(TURN.CROSS, TURN.CIRCLE);
   currentTurnElement.classList.add(currentTurn);
