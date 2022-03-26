@@ -14,6 +14,7 @@ ul {
 }
 
 /* Game styles */
+
 .game-page {
   display: flex;
   flex-flow: row nowrap;
