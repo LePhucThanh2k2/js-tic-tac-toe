@@ -2,6 +2,7 @@ import { CELL_VALUE, TURN, GAME_STATUS } from "./constants.js";
 import {
   getCellElementAtIdx,
   getCellElementList,
+  getCellUlElement,
   getCurrentTurnElement,
   getGameStatusElement,
   getReplayButtonElement,
@@ -63,6 +64,7 @@ function handleCellClick(cell, index) {
   // check cell isClicked
   const isClicked =
     cell.classList.contains(TURN.CROSS) || cell.classList.contains(TURN.CIRCLE);
+  // only allow click if game is playing and that cell is not clicked yet
   if (isClicked || isEndGame) return;
   // set selector cell
   cell.classList.add(currentTurn);
@@ -94,9 +96,14 @@ function handleCellClick(cell, index) {
   }
 }
 function initCellElementList() {
-  const cellElementList = getCellElementList();
-  cellElementList.forEach((cell, index) => {
-    cell.addEventListener("click", () => handleCellClick(cell, index));
+  const cellLiElement = getCellElementList();
+  const cellUlElement = getCellUlElement();
+  cellLiElement.forEach((cell, index) => {
+    cell.dataset.id = index;
+  });
+  cellUlElement.addEventListener("click", (event) => {
+    const index = event.target.dataset.id;
+    handleCellClick(event.target, index);
   });
 }
 (() => {
